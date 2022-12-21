@@ -1,4 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Gianluca
+  Date: 21/12/2022
+  Time: 17:23
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -37,11 +44,10 @@
                     <a class="nav-link active linkStyle text-white" aria-current="page" href="hello-servlet">Servlet1</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active linkStyle text-white" aria-current="page" href="page1.jsp">Pagina Servlet 2</a>
+                    <a class="nav-link active linkStyle text-white" aria-current="page" href="servlet2"> Run Servlet2</a>
                 </li>
             </ul>
         </div>
-
         <form class="d-flex" role="search">
             <input class="form-control me-2 float-end" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -51,10 +57,8 @@
 </nav>
 
 
+Ciao mi chiamo ${nome}
+
 
 </body>
 </html>
-
-
-
-
