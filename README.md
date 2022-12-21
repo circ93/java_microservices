@@ -5,6 +5,9 @@
 - Work environment creation
 
 > IntelliJ -> Jakarta project
+> 
 > Maven
+> 
 > Tomcat
+> 
 > XAMPP -> Apache + MySql
