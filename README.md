@@ -4,7 +4,7 @@
 ## Day 1
 - Work environment creation
 
-> Intellij -> Jakarta
+> IntelliJ -> Jakarta project
 > Maven
 > Tomcat
 > XAMPP -> Apache + MySql
