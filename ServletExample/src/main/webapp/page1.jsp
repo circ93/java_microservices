@@ -44,7 +44,7 @@
                     <a class="nav-link active linkStyle text-white" aria-current="page" href="hello-servlet">Servlet1</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active linkStyle text-white" aria-current="page" href="servlet2"> Run Servlet2</a>
+                    <a class="nav-link active linkStyle text-white" aria-current="page" href="servlet2">Servlet2</a>
                 </li>
             </ul>
         </div>

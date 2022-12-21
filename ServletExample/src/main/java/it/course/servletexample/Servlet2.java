@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.OverridesAttribute;
 
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ public class Servlet2 extends HttpServlet {
         super.init();
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jspPage = "page1.jsp";
         String name = "Gianluca";
@@ -26,4 +28,8 @@ public class Servlet2 extends HttpServlet {
         view.forward(request, response);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
 }

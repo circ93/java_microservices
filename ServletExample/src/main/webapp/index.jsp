@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active linkStyle text-white" aria-current="page" href="index.jsp">Home</a>
+                    <a class="nav-link active linkStyle text-white" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active linkStyle text-white" aria-current="page" href="https://github.com/circ93/java_microservices/" target="_blank">Git Gian</a>
@@ -37,7 +37,7 @@
                     <a class="nav-link active linkStyle text-white" aria-current="page" href="hello-servlet">Servlet1</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active linkStyle text-white" aria-current="page" href="page1.jsp">Pagina Servlet 2</a>
+                    <a class="nav-link active linkStyle text-white" aria-current="page" href="servlet2">Servlet2</a>
                 </li>
             </ul>
         </div>
