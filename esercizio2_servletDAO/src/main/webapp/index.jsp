@@ -22,9 +22,9 @@
 <!-- container -->
 <div class="container">
     <!-- row -->
-    <div class="row">
+    <div class="row justify-content-md-center">
         <!-- column -->
-        <div class="col-6 mt-3">
+        <div class="col-6 mt-3 text-center">
 
             <h1>QUESTA E' LA HOME</h1>
 
@@ -33,6 +33,26 @@
         <!-- end column -->
     </div>
     <!-- end row -->
+
+    <!-- row 2 -->
+    <div class="row justify-content-md-center">
+        <!-- column 1 -->
+        <div class="col-3 mt-5">
+            <img src="https://www.begear.it/wp-content/uploads/2015/11/java-logo.jpg" height="100px">
+        </div>
+        <!-- end column 1 -->
+        <!-- column 1 -->
+        <div class="col-3 mt-5">
+            <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/difference_between_sql_and_mysql.jpg" height="100px">
+        </div>
+        <!-- end column 1 -->
+        <!-- column 1 -->
+        <div class="col-3 mt-5">
+            <img src="https://www.mcloud.rs/wp-content/uploads/2020/12/git-logo.jpg" height="100px">
+        </div>
+        <!-- end column 1 -->
+    </div>
+    <!-- end row 2 -->
 </div>
 <!-- end container -->
 

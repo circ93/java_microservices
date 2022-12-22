@@ -26,7 +26,7 @@
           <a class="nav-link active linkStyle text-white" aria-current="page" href="https://github.com/AlessandroS94/corso_21122022" target="_blank">Git Alessandro</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active linkStyle text-white" aria-current="page" href="user-form.jsp">Form inserimento</a>
+          <a class="nav-link active linkStyle text-white" aria-current="page" href="user-form.jsp">Modifica DB</a>
         </li>
       </ul>
     </div>
