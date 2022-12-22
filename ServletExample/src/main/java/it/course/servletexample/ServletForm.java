@@ -12,12 +12,12 @@ import java.util.Objects;
 @WebServlet(name = "ServletForm", value = "/servlet_login")
 public class ServletForm extends HelloServlet{
 
-    String user;
-    String pass;
+    private final String user = "gianluca";
+    private final String pass = "pippo";
+
     @Override
     public void init() {
-        user = "gianluca";
-        pass = "pippo";
+        super.init();
     }
 
     @Override
@@ -29,7 +29,8 @@ public class ServletForm extends HelloServlet{
         String password = request.getParameter("pass");
         String email = request.getParameter("email");
 
-        if (Objects.equals(username, user) && Objects.equals(password, pass)){
+
+        if (username.equals(user) && password.equals(pass)){
             request.setAttribute("user", username);
             request.setAttribute("email", email);
             RequestDispatcher view1 = request.getRequestDispatcher(jspPage);
