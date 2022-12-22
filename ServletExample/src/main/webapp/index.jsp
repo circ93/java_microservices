@@ -19,6 +19,32 @@
     <jsp:include page="navbar.jsp"></jsp:include>
 </header>
 
+<!-- container -->
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-5 mt-3">
+
+            <form action="servlet_form1" method="post">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" name="inputName">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+            </form>
+
+        </div>
+        <!-- end column -->
+    </div>
+    <!-- end row -->
+</div>
+<!-- end container -->
+
 
 
 </body>

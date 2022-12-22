@@ -32,7 +32,9 @@
     <div class="row">
         <!-- column -->
         <div class="col-5 mt-3">
-            Ciao mi chiamo ${nome}
+
+            Ciao mi chiamo ${nome}<br>
+
         </div>
         <!-- end column -->
     </div>
