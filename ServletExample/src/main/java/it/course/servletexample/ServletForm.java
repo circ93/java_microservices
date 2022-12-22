@@ -36,8 +36,7 @@ public class ServletForm extends HelloServlet{
             RequestDispatcher view1 = request.getRequestDispatcher(jspPage);
             view1.forward(request, response);
         } else {
-            request.setAttribute("msg", "Ricompila il form, i dati inseriti non sono presenti nel DB");
-            RequestDispatcher view2 = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher view2 = request.getRequestDispatcher("servlet-error");
             view2.forward(request, response);
         }
 
