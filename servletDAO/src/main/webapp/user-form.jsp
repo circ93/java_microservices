@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Gianluca
-  Date: 22/12/2022
-  Time: 11:27
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,31 +14,36 @@
 <body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <header>
   <jsp:include page="navbar.jsp"></jsp:include>
 </header>
-
 
 <!-- container -->
 <div class="container">
   <!-- row -->
   <div class="row">
     <!-- column -->
-    <div class="col-5 mt-3">
+    <div class="col-6 mt-3">
 
-      Nome: ${student[0].getNome()}<br>
-      Cognome: ${student[0].getCognome()}
-      <br>
-      Nome: ${student[1].getNome()}<br>
-      Cognome: ${student[1].getCognome()}
-      <br>
-      Nome: ${student[2].getNome()}<br>
-      Cognome: ${student[2].getCognome()}
+      <form method="post" action="ServletInserUser">
+        <div class="mb-3">
+          <label  class="form-label">Nome</label>
+          <input type="text" class="form-control" name="name" required="required">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">email</label>
+          <input type="text" class="form-control" name="email" required="required">
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Stato</label>
+          <input type="text" class="form-control" name="country" required="required">
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
 
-      <c:forEach items="${student}" var="stud">
-        <p>Nome: ${stud.getNome()}</p>
-        <p>Cognome: ${stud.getCognome()}</p><br>
-      </c:forEach>
+      <p style="color: green;">${msg}</p>
+
 
     </div>
     <!-- end column -->
@@ -58,4 +56,7 @@
 
 </body>
 </html>
+
+
+
 
