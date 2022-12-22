@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import static java.lang.Integer.parseInt;
+
 @WebServlet(name = "ServletInserUser", value = "/ServletInserUser")
 public class ServletInserUser extends HttpServlet {
     private UserDAO userDAO;
@@ -25,7 +27,9 @@ public class ServletInserUser extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        User newUser = new User(name, email, country);
+        Integer eta = Integer.parseInt(request.getParameter("eta"));
+
+        User newUser = new User(name, email, country, eta);
         try {
             userDAO.insertUser(newUser);
         } catch (SQLException e) {
@@ -33,7 +37,7 @@ public class ServletInserUser extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        //response.sendRedirect("userInserito.jsp");
+
 
         request.setAttribute("msg", "L'utente è stato inserito correttamente!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");

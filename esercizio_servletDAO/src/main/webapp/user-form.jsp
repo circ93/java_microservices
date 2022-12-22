@@ -39,6 +39,10 @@
           <label  class="form-label">Stato</label>
           <input type="text" class="form-control" name="country" required="required">
         </div>
+        <div class="mb-3">
+          <label  class="form-label">Età</label>
+          <input type="number" class="form-control" name="eta" required="required">
+        </div>
         <button type="submit" class="btn btn-success">Save</button>
       </form>
 
