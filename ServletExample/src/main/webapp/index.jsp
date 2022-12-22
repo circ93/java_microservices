@@ -55,6 +55,45 @@
 <!-- end container -->
 
 
+<!-- container -->
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-6 mt-3">
+
+            <form action="servlet_student" method="post">
+
+                <div class="input-group">
+                    <span class="input-group-text">Name and Last Name</span>
+                    <input type="text" aria-label="First name" class="form-control" id="firstName1" name="firstName1">
+                    <input type="text" aria-label="Last name" class="form-control" id="lastName1" name="lastName1">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text">Name and Last Name</span>
+                    <input type="text" aria-label="First name" class="form-control" id="firstName2" name="firstName2">
+                    <input type="text" aria-label="Last name" class="form-control" id="lastName2" name="lastName2">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-text">Name and Last Name</span>
+                    <input type="text" aria-label="First name" class="form-control" id="firstName3" name="firstName3">
+                    <input type="text" aria-label="Last name" class="form-control" id="lastName3" name="lastName3">
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary mt-3">Create</button>
+            </form>
+
+        </div>
+        <!-- end column -->
+    </div>
+    <!-- end row -->
+</div>
+<!-- end container -->
+
 
 </body>
 </html>
