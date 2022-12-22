@@ -24,19 +24,28 @@
     <!-- row -->
     <div class="row">
         <!-- column -->
-        <div class="col-5 mt-3">
+        <div class="col-6 mt-3">
 
-            <form action="servlet_form1" method="post">
+            <form action="servlet_login" method="post">
+
+                <div class="input-group">
+                    <span class="input-group-text">User and Pass</span>
+                    <input type="text" aria-label="First name" class="form-control" id="user" name="user">
+                    <input type="password" aria-label="Password" class="form-control" id="pass" name="pass">
+                </div>
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputName">Name</label>
-                        <input type="text" class="form-control" id="inputName" name="inputName">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+                <button type="submit" class="btn btn-primary mt-3">Login</button>
             </form>
+
+            <p style="color: red;">${msg}</p>
+
 
         </div>
         <!-- end column -->
