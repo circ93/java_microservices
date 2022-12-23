@@ -34,7 +34,21 @@ public class ServletShowUsers extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String status = req.getParameter("status");
+        String msg_delete = req.getParameter("msg_delete");
+
+        if (status != null){
+            req.setAttribute("status", status);
+        }
+        if (msg_delete != null){
+            req.setAttribute("msg_delete", msg_delete);
+        }
+
+
+        List<User> users = userDAO.selectAllUsers();
+        req.setAttribute("users", users);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("show-users.jsp");
+        dispatcher.forward(req,resp);
     }
 
 

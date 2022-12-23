@@ -18,6 +18,8 @@ public class UserDAO {
     private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
 
     private static final String SELECT_ALL_USERS = "select * from users";
+    private static final String SELECT_USER_BY_ID = "select id,name,email,country,eta from users where id =?";
+    private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =?, eta =? where id = ?;";
 
 
     public UserDAO() {
@@ -86,6 +88,50 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
         return users;
+    }
+
+    public boolean updateUser(User user) throws SQLException {
+        boolean rowUpdated;
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getCountry());
+            statement.setInt(4, user.getEta());
+            statement.setInt(5, user.getId());
+
+            rowUpdated = statement.executeUpdate() > 0;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return rowUpdated;
+    }
+
+    public User selectUser(int id) {
+        User user = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                int eta = rs.getInt("eta");
+                user = new User(id, name, email, country, eta);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 
 

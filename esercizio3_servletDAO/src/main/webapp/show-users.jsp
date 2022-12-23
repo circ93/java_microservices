@@ -35,6 +35,9 @@
         <!-- column -->
         <div class="col-9 mt-3">
 
+            <p style="color: green;">${status}</p>
+            <p style="color: green;">${msg_delete}</p>
+
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
@@ -57,7 +60,7 @@
                         <td><c:out value="${user.getEta()}"/></td>
                         <td>
                             <a href="ServletDeleteUser?id=<c:out value="${user.getId()}"/>"><i class="fa-solid fa-trash"></i></a>
-                            <a href="#"> <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="servlet-search-user?id=<c:out value="${user.getId()}"/>"> <i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                 </c:forEach>
