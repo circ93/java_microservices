@@ -31,7 +31,8 @@
       <form method="post" action="servlet-update-user">
         <h3>MODIFICA UTENTE SELEZIONATO</h3>
         <div class="mb-3">
-          <label  class="form-label">Utente con ID ${user.getId()}</label>
+          <label  class="form-label">ID utente</label>
+          <input type="number" class="form-control" name="id_2" disabled value="${user.getId()}">
           <input type="hidden" class="form-control" name="id" value="${user.getId()}">
         </div>
         <div class="mb-3">

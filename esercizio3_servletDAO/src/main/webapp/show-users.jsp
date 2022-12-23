@@ -35,7 +35,7 @@
         <!-- column -->
         <div class="col-9 mt-3">
 
-            <p style="color: green;">${status}</p>
+            <p style="color: green;">${msg_update}</p>
             <p style="color: green;">${msg_delete}</p>
 
             <table class="table">

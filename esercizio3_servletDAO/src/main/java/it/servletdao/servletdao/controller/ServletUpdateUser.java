@@ -42,7 +42,7 @@ public class ServletUpdateUser extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute("status", "Utente aggiornato correttamente!");
+        request.setAttribute("msg_update", "Utente aggiornato correttamente!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("servlet-show-users");
         dispatcher.forward(request,resp);
 

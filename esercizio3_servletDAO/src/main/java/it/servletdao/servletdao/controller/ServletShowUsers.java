@@ -37,9 +37,11 @@ public class ServletShowUsers extends HttpServlet {
         String status = req.getParameter("status");
         String msg_delete = req.getParameter("msg_delete");
 
+        //messaggio dalla Servlet
         if (status != null){
-            req.setAttribute("status", status);
+            req.setAttribute("msg_update", status);
         }
+        //messaggio dalla servlet Delete User
         if (msg_delete != null){
             req.setAttribute("msg_delete", msg_delete);
         }
