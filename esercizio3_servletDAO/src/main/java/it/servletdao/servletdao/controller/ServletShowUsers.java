@@ -46,7 +46,6 @@ public class ServletShowUsers extends HttpServlet {
             req.setAttribute("msg_delete", msg_delete);
         }
 
-
         List<User> users = userDAO.selectAllUsers();
         req.setAttribute("users", users);
         RequestDispatcher dispatcher = req.getRequestDispatcher("show-users.jsp");

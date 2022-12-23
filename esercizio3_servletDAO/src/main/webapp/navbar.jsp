@@ -32,6 +32,9 @@
         <li class="nav-item">
           <a class="nav-link linkStyle text-white ${param.showDB}" aria-current="page" href="servlet-show-users">Show DB</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link linkStyle text-white" aria-current="page" href="error-page.jsp">Error Page</a>
+        </li>
       </ul>
     </div>
 

@@ -27,6 +27,7 @@ public class ServletDeleteUser extends HttpServlet {
         request.setAttribute("msg_delete", "L'utente è stato eliminato dal DB!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("servlet-show-users");
         dispatcher.forward(request, response);
+
     }
 
     @Override

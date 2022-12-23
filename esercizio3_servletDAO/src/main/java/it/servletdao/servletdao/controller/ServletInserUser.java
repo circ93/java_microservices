@@ -31,12 +31,10 @@ public class ServletInserUser extends HttpServlet {
         User newUser = new User(name, email, country, eta);
         try {
             userDAO.insertUser(newUser);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace(System.err);
+            response.sendRedirect("error-page.jsp");
         }
-
 
         request.setAttribute("msg_insert", "L'utente è stato inserito correttamente!");
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
