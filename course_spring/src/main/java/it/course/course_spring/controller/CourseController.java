@@ -19,13 +19,13 @@ public class CourseController {
     CourseRepository courseRepository;
 
     @PostMapping("/course")
-    public ResponseEntity<Course> createCourse(@RequestBody Course course){
+    public ResponseEntity<Course> createCourses (@RequestBody Course course){
         Course _course = courseRepository.save(course);
         return new ResponseEntity<>(_course, HttpStatus.CREATED);
     }
 
     @GetMapping("/courses")
-    public ResponseEntity<List<Course>> getCourse (){
+    public ResponseEntity<List<Course>> getCourses (){
         List<Course> courseArrayList = new ArrayList<Course>();
         courseRepository.findAll().forEach(courseArrayList::add);
         if (courseArrayList.isEmpty()) {
@@ -44,6 +44,9 @@ public class CourseController {
 
     @PutMapping("course/{id}")
     public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody Course courseRequest) {
+        //siccome potrei ricevere un oggetto course null va gestito l'errore,
+        //o in questo modo implementando il metodo getReferenceById nell'interfaccia CourseRepo
+        //oppure creando una execption custom
         Course _course = courseRepository.getReferenceById(id);
 
         if (_course == null) {
@@ -55,6 +58,17 @@ public class CourseController {
             Course result = courseRepository.save(_course);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+
+    }
+
+    @GetMapping("/course/{id}")
+    public ResponseEntity<Optional<Course>> getCourse (@PathVariable("id") long id){
+        Optional<Course> _course = courseRepository.findById(id);
+        if (_course.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(_course, HttpStatus.OK);   
         }
 
     }
