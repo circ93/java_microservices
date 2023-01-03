@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+//Entity ci dice che dobbiamo dare persistenza a questa classe nel DB
 @Entity
 @Table(name = "student")
 public class Student {

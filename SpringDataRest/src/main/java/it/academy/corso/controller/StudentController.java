@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class StudentController {
+    //ci occorre creare un istanza della repository che fa da tramite con il DB
     @Autowired
     StudentRepository studentRepository;
 
