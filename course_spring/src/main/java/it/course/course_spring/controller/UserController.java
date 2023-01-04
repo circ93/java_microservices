@@ -112,12 +112,43 @@ public class UserController {
         User _user = userRepository.getReferenceById(id);
         Role _role = roleRepository.getReferenceById(roleRequest.getId());
 
-        Set<Role> roleUser = new HashSet<>();
+        if (_user == null || _role == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            Set<Role> roleUser = new HashSet<>();
 
-        roleUser.add(_role);
-        _user.setRoles(roleUser);
-        User newUser = userRepository.save(_user);
-        return new ResponseEntity<>(newUser, HttpStatus.OK);
+            roleUser.add(_role);
+            _user.setRoles(roleUser);
+            User newUser = userRepository.save(_user);
 
+            return new ResponseEntity<>(newUser, HttpStatus.OK);
+        }
     }
+
+    //restituisce i ruoli dell'utente con id passato
+    @GetMapping("role/user/{id}")
+    public Set<Role> getRoleUser(@PathVariable("id") long id) {
+
+        User _user = userRepository.getReferenceById(id);
+
+        return _user.getRoles();
+    }
+
+    //restituisce tutti gli utenti con ruolo uguale all'id passato
+    @GetMapping("role/{id}")
+    public Set<User> getUserRole(@PathVariable("id") long id) {
+
+        Role _role = roleRepository.getReferenceById(id);
+
+        return _role.getUsers();
+    }
+
+
+
+
+
+
+
+
+
 }
