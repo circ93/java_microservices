@@ -23,7 +23,7 @@ public class Course {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JoinTable(
             name = "course_user",
             joinColumns = @JoinColumn(name = "course_id"),
@@ -31,6 +31,10 @@ public class Course {
     )
 
     private Set<User> users = new LinkedHashSet<>();
+
+    public void addUser(User u){
+        this.users.add(u);
+    }
 
     public Course(){}
 }

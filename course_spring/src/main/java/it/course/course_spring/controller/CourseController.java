@@ -63,9 +63,9 @@ public class CourseController {
     }
 
     @GetMapping("/course/{id}")
-    public ResponseEntity<Optional<Course>> getCourseById (@PathVariable("id") long id){
-        Optional<Course> _course = courseRepository.findById(id);
-        if (_course.isEmpty()) {
+    public ResponseEntity<Course> getCourseById (@PathVariable("id") long id){
+        Course _course = courseRepository.getReferenceById(id);
+        if (_course == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(_course, HttpStatus.OK);
