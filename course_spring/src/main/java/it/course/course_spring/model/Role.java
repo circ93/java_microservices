@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,6 +21,14 @@ public class Role {
     @Column(length = 20)
     private ERole name;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
     public Role(){}
+
+    public void addUsers(User u){
+        this.users.add(u);
+    }
 
 }

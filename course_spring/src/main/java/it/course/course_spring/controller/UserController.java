@@ -1,8 +1,10 @@
 package it.course.course_spring.controller;
 
 import it.course.course_spring.model.Course;
+import it.course.course_spring.model.Role;
 import it.course.course_spring.model.User;
 import it.course.course_spring.repository.CourseRepository;
+import it.course.course_spring.repository.RoleRepository;
 import it.course.course_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     CourseRepository courseRepository;
+    @Autowired
+    RoleRepository roleRepository;
 
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user){
@@ -93,10 +97,27 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //stampa i corsi dell'utente con id passato
     @GetMapping("insertCourse/{id}/courses")
     public Set<Course> getCoursesUser(@PathVariable("id") long id){
         User _user = userRepository.getReferenceById(id);
 
         return _user.getCourses();
+    }
+
+    //assegna un ruolo ad un utente
+    @PostMapping("role/assign/{id}")
+    public ResponseEntity<User> assignRole(@PathVariable("id") long id, @RequestBody Role roleRequest){
+
+        User _user = userRepository.getReferenceById(id);
+        Role _role = roleRepository.getReferenceById(roleRequest.getId());
+
+        Set<Role> roleUser = new HashSet<>();
+
+        roleUser.add(_role);
+        _user.setRoles(roleUser);
+        User newUser = userRepository.save(_user);
+        return new ResponseEntity<>(newUser, HttpStatus.OK);
+
     }
 }
