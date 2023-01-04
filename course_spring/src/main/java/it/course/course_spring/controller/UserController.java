@@ -66,30 +66,37 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("insertCourse/{idUser}/{idCourse}")
-    public ResponseEntity<User> insertCourse(@PathVariable("idUser") long idUser, @PathVariable("idCourse") long idCourse){
+    //assegna un corso ad un utente, entrambi esistenti
+    @PostMapping("insertCourse/{idUser}/existcours")
+    public ResponseEntity<Course> insertCourse(@PathVariable("idUser") long idUser, @RequestBody Course courseRequest){
 
         User _user = userRepository.getReferenceById(idUser);
-        Course _course = courseRepository.getReferenceById(idCourse);
+        Course _course = courseRepository.getReferenceById(courseRequest.getId());
 
-        if (_user != null && _course != null){
-            _user.addCourse(_course);
-            _course.addUser(_user);
+        Set<User> userSet = new HashSet<>();
+        userSet.add(_user);
+        _course.setUsers(userSet);
+        Course user_course = courseRepository.save(_course);
 
-            return new ResponseEntity<>(_user, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(user_course,HttpStatus.NOT_FOUND);
 
     }
 
+    //inserisce un nuovo corso ad un utente gia esistente
     @PostMapping("insertCourse/{idUser}/course")
-    public ResponseEntity<User> insertCourse(@PathVariable("idUser") long idUser, @RequestBody Course courseRequest){
+    public ResponseEntity<User> createCourseUser(@PathVariable("idUser") long idUser, @RequestBody Course courseRequest){
         User _user = userRepository.getReferenceById(idUser);
         Set<User> userSet = new HashSet<>();
         userSet.add(_user);
         courseRequest.setUsers(userSet);
-        Course _course = courseRepository.save(courseRequest);
+        courseRepository.save(courseRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("insertCourse/{id}/courses")
+    public Set<Course> getCoursesUser(@PathVariable("id") long id){
+        User _user = userRepository.getReferenceById(id);
+
+        return _user.getCourses();
+    }
 }
