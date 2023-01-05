@@ -1,15 +1,21 @@
 package it.course.course_spring.controller;
 
+import it.course.course_spring.business.Register;
 import it.course.course_spring.model.Course;
+import it.course.course_spring.model.ERole;
 import it.course.course_spring.model.Role;
 import it.course.course_spring.model.User;
+import it.course.course_spring.payload.request.SignupRequest;
+import it.course.course_spring.payload.response.MessageResponse;
 import it.course.course_spring.repository.CourseRepository;
 import it.course.course_spring.repository.RoleRepository;
 import it.course.course_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -25,11 +31,32 @@ public class UserController {
     CourseRepository courseRepository;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    PasswordEncoder encoder;
+    @Autowired
+    Register register;
 
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@RequestBody User user){
         User _user = userRepository.save(user);
         return new ResponseEntity<>(_user, HttpStatus.CREATED);
+    }
+
+
+    @PostMapping("/user/add")
+    public ResponseEntity<?> createUserAdmin(@RequestBody SignupRequest signUpRequest){
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        User user = register.createUserBusiness(signUpRequest);
+
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     @GetMapping("/users")

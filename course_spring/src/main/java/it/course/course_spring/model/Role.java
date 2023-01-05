@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
 
     @Id
@@ -26,9 +26,5 @@ public class Role {
     private Set<User> users;
 
     public Role(){}
-
-    public void addUsers(User u){
-        this.users.add(u);
-    }
 
 }

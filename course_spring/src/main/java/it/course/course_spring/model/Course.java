@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "course")
+@Table(name = "courses")
 public class Course {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -26,16 +26,12 @@ public class Course {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JsonIgnore
     @JoinTable(
-            name = "course_user",
+            name = "courses_user",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 
     private Set<User> users = new HashSet<>();
-
-    public void addUser(User u){
-        this.users.add(u);
-    }
 
     public Course(){}
 }
