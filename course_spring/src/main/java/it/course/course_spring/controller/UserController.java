@@ -2,7 +2,6 @@ package it.course.course_spring.controller;
 
 import it.course.course_spring.business.Register;
 import it.course.course_spring.model.Course;
-import it.course.course_spring.model.ERole;
 import it.course.course_spring.model.Role;
 import it.course.course_spring.model.User;
 import it.course.course_spring.payload.request.SignupRequest;

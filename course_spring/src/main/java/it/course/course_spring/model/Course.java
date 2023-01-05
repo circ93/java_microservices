@@ -26,12 +26,18 @@ public class Course {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
     @JsonIgnore
     @JoinTable(
-            name = "courses_user",
+            name = "courses_users",
             joinColumns = @JoinColumn(name = "course_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
 
     private Set<User> users = new HashSet<>();
+
+
+    // il mappedBy deve puntare alla colonna in exam creata in manytoone
+    @OneToMany(mappedBy = "course")
+    @JsonIgnore
+    private Set<Exam> exams;
 
     public Course(){}
 }
