@@ -1,5 +1,6 @@
 package it.course.course_spring.controller;
 
+import it.course.course_spring.business.CourseBO;
 import it.course.course_spring.model.Course;
 import it.course.course_spring.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +14,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CourseController {
-
+        
     @Autowired
-    CourseRepository courseRepository;
+    CourseBO courseBO;
 
     @PostMapping("/course")
     public ResponseEntity<Course> createCourses (@RequestBody Course course){
-        Course _course = courseRepository.save(course);
+        Course _course = courseBO.save(course);
         return new ResponseEntity<>(_course, HttpStatus.CREATED);
     }
 
     @GetMapping("/courses")
     public ResponseEntity<List<Course>> getCourses (){
         List<Course> courseArrayList = new ArrayList<Course>();
-        courseRepository.findAll().forEach(courseArrayList::add);
+        //courseRepository.findAll().forEach(courseArrayList::add);
+        courseArrayList = courseBO.findAllCourse();
         if (courseArrayList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -36,7 +38,8 @@ public class CourseController {
 
     @DeleteMapping("course/{id}")
     public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("id") long id) {
-        courseRepository.deleteById(id);
+        //courseRepository.deleteById(id);
+        courseBO.deleteByID(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -46,7 +49,7 @@ public class CourseController {
         //siccome potrei ricevere un oggetto course null va gestito l'errore,
         //o in questo modo implementando il metodo getReferenceById nell'interfaccia CourseRepo
         //oppure creando una execption custom
-        Course _course = courseRepository.getReferenceById(id);
+        Course _course = courseBO.findCourseByID(id);
 
         if (_course == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -54,7 +57,7 @@ public class CourseController {
             _course.setDescription(courseRequest.getDescription());
             _course.setName(courseRequest.getName());
 
-            Course result = courseRepository.save(_course);
+            Course result = courseBO.save(_course);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -63,7 +66,7 @@ public class CourseController {
 
     @GetMapping("/course/{id}")
     public ResponseEntity<Course> getCourseById (@PathVariable("id") long id){
-        Course _course = courseRepository.getReferenceById(id);
+        Course _course = courseBO.findCourseByID(id);
         if (_course == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {

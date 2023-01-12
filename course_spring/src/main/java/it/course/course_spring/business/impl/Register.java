@@ -1,5 +1,6 @@
-package it.course.course_spring.business;
+package it.course.course_spring.business.impl;
 
+import it.course.course_spring.business.RegisterBO;
 import it.course.course_spring.model.ERole;
 import it.course.course_spring.model.Role;
 import it.course.course_spring.model.User;
@@ -16,7 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class Register {
+public class Register implements RegisterBO {
 
     @Autowired
      private RoleRepository roleRepository;

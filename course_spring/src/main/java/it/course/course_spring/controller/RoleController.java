@@ -1,5 +1,6 @@
 package it.course.course_spring.controller;
 
+import it.course.course_spring.business.RoleBO;
 import it.course.course_spring.model.Role;
 import it.course.course_spring.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +16,19 @@ import java.util.Set;
 public class RoleController {
 
     @Autowired
-    RoleRepository roleRepository;
+    RoleBO roleBO;
 
     @PostMapping("/role")
     public ResponseEntity<Role> createRole(@RequestBody Role roleRequest){
-        Role _role = roleRepository.save(roleRequest);
+        Role _role = roleBO.save(roleRequest);
         return new ResponseEntity<>(_role, HttpStatus.CREATED);
     }
 
     @GetMapping("/roles")
     public ResponseEntity<Set<Role>> getRole(){
         Set<Role> roles = new HashSet<>();
-        roleRepository.findAll().forEach(roles::add);
+        //roleRepository.findAll().forEach(roles::add);
+        roles = roleBO.findAllRole();
 
         if (roles.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -37,14 +39,15 @@ public class RoleController {
 
     @PutMapping("/role/{id}")
     public ResponseEntity<Role> updateRole(@PathVariable("id") long id, @RequestBody Role roleRequest){
-        Role _role = roleRepository.findById(id).orElse(null);
+        //Role _role = roleRepository.findById(id).orElse(null);
+        Role _role = roleBO.findRoleByID(id);
 
         if (_role == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             _role.setName(roleRequest.getName());
 
-            Role result = roleRepository.save(_role);
+            Role result = roleBO.save(_role);
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
@@ -53,7 +56,7 @@ public class RoleController {
 
     @DeleteMapping("role/delete/{id}")
     public ResponseEntity<HttpStatus> deleteRole(@PathVariable("id") long id){
-        roleRepository.deleteById(id);
+        roleBO.deleteRoleByID(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
