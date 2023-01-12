@@ -7,8 +7,6 @@ import it.course.course_spring.payload.request.LoginRequest;
 import it.course.course_spring.payload.request.SignupRequest;
 import it.course.course_spring.payload.response.MessageResponse;
 import it.course.course_spring.payload.response.UserInfoResponse;
-import it.course.course_spring.repository.RoleRepository;
-import it.course.course_spring.repository.UserRepository;
 import it.course.course_spring.security.jwt.JwtUtils;
 import it.course.course_spring.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
@@ -41,6 +39,8 @@ public class AuthController {
     @Autowired
     UserBO userBO;
 
+    //il controllere restituisce solo la risposta, quindi tutta la lalogica di implementazione sta nella business
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -66,15 +66,15 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userBO.existUserByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
-        }
 
-        if (userBO.existsUserByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
+        String msg = register.createUserBusiness(signUpRequest);
 
-        User user = register.createUserBusiness(signUpRequest);
+        switch (msg){
+            case "usernameExists":
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            case "emailExists":
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+        }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

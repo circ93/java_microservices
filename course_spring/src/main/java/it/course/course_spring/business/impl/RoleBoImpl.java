@@ -1,6 +1,7 @@
 package it.course.course_spring.business.impl;
 
 import it.course.course_spring.business.RoleBO;
+import it.course.course_spring.model.ERole;
 import it.course.course_spring.model.Role;
 import it.course.course_spring.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,5 @@ public class RoleBoImpl implements RoleBO {
     public void deleteRoleByID(long id) {
         roleRepository.deleteById(id);
     }
+
 }

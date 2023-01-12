@@ -10,6 +10,8 @@ import it.course.course_spring.repository.RoleRepository;
 
 import it.course.course_spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,17 @@ public class Register implements RegisterBO {
     private UserRepository userRepository;
 
 
-    public User createUserBusiness(SignupRequest signUpRequest) {
+    public String createUserBusiness(SignupRequest signUpRequest) {
+
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return "usernameExists";
+        }
+
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return "emailExists";
+        }
+
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
@@ -68,9 +80,7 @@ public class Register implements RegisterBO {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return user;
+        return "Create";
     }
-
-    public Register(){}
 
 }

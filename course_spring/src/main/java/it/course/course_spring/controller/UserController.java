@@ -49,16 +49,14 @@ public class UserController {
 
     @PostMapping("/user/add")
     public ResponseEntity<?> createUserAdmin(@RequestBody SignupRequest signUpRequest){
-        if (userBO.existUserByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        String msg = register.createUserBusiness(signUpRequest);
+
+        switch (msg){
+            case "usernameExists":
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            case "emailExists":
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
-
-        if (userBO.existsUserByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
-        }
-
-        User user = register.createUserBusiness(signUpRequest);
-
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
