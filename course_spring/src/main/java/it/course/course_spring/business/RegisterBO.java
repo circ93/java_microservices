@@ -13,5 +13,7 @@ public interface RegisterBO {
 
     public ResponseCookie logoutUser();
 
+    public ResponseCookie authUserCookie(UserDetailsImpl userDetails);
+
 
 }
