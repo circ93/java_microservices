@@ -10,4 +10,12 @@ public interface WebSiteInfoBO {
     public WebSiteInfo getWebSiteInfo() throws DataAccessException;
 
     public List<WebSiteInfo> getAllSite() throws DataAccessException;
+
+    public String createInfo(WebSiteInfo site) throws DataAccessException;
+
+    public String deleteInfo(long id) throws DataAccessException;
+
+    public WebSiteInfo searchSiteByID(long id) throws DataAccessException;
+
+    public void saveInfo(WebSiteInfo site) throws DataAccessException;
 }

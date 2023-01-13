@@ -19,7 +19,10 @@
                     <a class="nav-link linkStyle text-white" aria-current="page" href="https://github.com/AlessandroS94/corso_21122022" target="_blank">Git Alessandro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link linkStyle text-white ${param.feature}" aria-current="page" href="${pageContext.request.contextPath}/sites">Feature</a>
+                    <a class="nav-link linkStyle text-white ${param.feature}" aria-current="page" href="${pageContext.request.contextPath}/sites">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link linkStyle text-white ${param.createInfo}" aria-current="page" href="${pageContext.request.contextPath}/createInfo">Create Info</a>
                 </li>
             </ul>
         </div>

@@ -22,11 +22,15 @@
 
             <h1>Sites</h1>
 
+            <p style="color: green;">${msg_delete}</p>
+            <p style="color: green;">${msg_update}</p>
+
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +39,10 @@
                     <tr>
                         <td><c:out value="${site.getName()}"/></td>
                         <td><c:out value="${site.getDescription()}"/></td>
+                        <td>
+                            <a href="deleteSite?id=<c:out value="${site.getId()}"/>"><i class="fa-solid fa-trash"></i></a>
+                            <a href="searchInfo?id=<c:out value="${site.getId()}"/>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
                     </tr>
                 </c:forEach>
 
