@@ -15,4 +15,6 @@ public interface ProjectBO {
 
     public String deleteProject(Long id) throws DataAccessException;
 
+    public Projects searchProjectById(Long id) throws DataAccessException;
+
 }

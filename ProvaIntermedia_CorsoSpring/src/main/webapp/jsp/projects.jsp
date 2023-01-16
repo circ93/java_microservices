@@ -45,7 +45,7 @@
                         <td><c:out value="${project.getRepo()}"/></td>
                         <td>
                             <a href="/deleteProject?id=${project.getId()}"><i class="fa-solid fa-trash"></i></a>
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/searchProject?id=${project.getId()}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -2,7 +2,6 @@ package it.nntdata.corso.springjsp.controller;
 
 import it.nntdata.corso.springjsp.business.interfaces.ProjectBO;
 import it.nntdata.corso.springjsp.model.Projects;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,18 @@ public class ProjectController {
 
     @GetMapping(path = {"/projects"})
     public ModelAndView getProjects() {
+        List<Projects> listProject = projectBO.findAll();
+
+        if (listProject.isEmpty()) {
+            String msg = "Nessun progetto trovato!";
+            return new ModelAndView("jsp/projects.jsp", "msg_error", msg);
+        } else {
+            return new ModelAndView("jsp/projects.jsp", "projects", listProject);
+        }
+    }
+
+    @PostMapping(path = "/projects")
+    public ModelAndView getProjects2(){
         List<Projects> listProject = projectBO.findAll();
 
         if (listProject.isEmpty()) {
@@ -53,6 +64,39 @@ public class ProjectController {
 
         String msg = projectBO.deleteProject(id);
         return new ModelAndView("/projects", "msg_delete", msg);
+    }
+
+    @GetMapping(path = {"/searchProject"})
+    public ModelAndView searchProject(@RequestParam Long id) {
+        Projects _project = projectBO.searchProjectById(id);
+
+        String msg;
+        if (_project == null){
+            msg = "Project non trovato!";
+            return new ModelAndView("/projects", "msg_error", msg);
+        } else {
+            return new ModelAndView("/jsp/editProject.jsp", "project", _project);
+        }
+    }
+
+    @PostMapping(path = {"/updateProject"})
+    public ModelAndView updateProject(@RequestParam Long id, String name, String description, String repo) {
+
+        Projects _project = projectBO.searchProjectById(id);
+        String msg;
+
+        if (_project == null) {
+            msg = "Non è stato possibile eliminare l'id selezionato.";
+        } else {
+            _project.setName(name);
+            _project.setDescription(description);
+            _project.setRepo(repo);
+
+            projectBO.save(_project);
+            msg = "Project aggiornato correttamente!";
+        }
+
+        return new ModelAndView("/projects", "msg_update", msg);
     }
 
 }

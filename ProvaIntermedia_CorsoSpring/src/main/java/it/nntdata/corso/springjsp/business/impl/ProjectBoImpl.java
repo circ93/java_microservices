@@ -53,4 +53,15 @@ public class ProjectBoImpl implements ProjectBO {
         }
         return msg;
     }
+
+    @Override
+    public Projects searchProjectById(Long id) throws DataAccessException {
+        Projects _project = projectsRepository.getReferenceById(id);
+
+        if (_project == null){
+            return null;
+        } else {
+            return _project;
+        }
+    }
 }
