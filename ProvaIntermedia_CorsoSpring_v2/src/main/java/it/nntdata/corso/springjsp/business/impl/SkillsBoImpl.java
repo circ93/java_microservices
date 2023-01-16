@@ -21,11 +21,6 @@ public class SkillsBoImpl implements SkillsBO {
     }
 
     @Override
-    public List<String> findDistinctCategory() throws DataAccessException {
-        return skillsRepository.getDistinctCategories();
-    }
-
-    @Override
     public void save(Skills skill) throws DataAccessException {
         skillsRepository.save(skill);
     }

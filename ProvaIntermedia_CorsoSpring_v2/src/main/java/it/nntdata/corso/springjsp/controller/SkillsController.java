@@ -1,11 +1,11 @@
 package it.nntdata.corso.springjsp.controller;
 
+import it.nntdata.corso.springjsp.business.interfaces.CategoriesSkillBO;
 import it.nntdata.corso.springjsp.business.interfaces.SkillsBO;
+import it.nntdata.corso.springjsp.model.CategoriesSkill;
 import it.nntdata.corso.springjsp.model.Skills;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,18 +19,8 @@ public class SkillsController {
     @Autowired
     SkillsBO skillsBO;
 
-    @GetMapping(path = {"/", "/index"})
-    public ModelAndView getCategory(){
-        //List<Skills> listCategory = skillsBO.findAll();
-        List<String> listCategories = skillsBO.findDistinctCategory();
-
-        if (listCategories.isEmpty()) {
-            String msg = "Non ci sono categorie!";
-            return new ModelAndView("jsp/index.jsp", "msg_error", msg);
-        } else {
-            return new ModelAndView("jsp/index.jsp", "categories", listCategories);
-        }
-    }
+    @Autowired
+    CategoriesSkillBO categoriesSkillBO;
 
     @GetMapping(path = {"/skills"})
     public ModelAndView getSkills(){
@@ -58,11 +48,13 @@ public class SkillsController {
 
     @GetMapping(path = {"/newSkills"})
     public ModelAndView newSkills(){
-        return new ModelAndView("jsp/createSkills.jsp");
+        //recupero la lista di tutte le categori presenti così da popolare il dropdown menù
+        List<CategoriesSkill> listCategories = categoriesSkillBO.getCategories();
+        return new ModelAndView("jsp/createSkills.jsp", "categories", listCategories);
     }
 
     @PostMapping(path = {"/createSkills"})
-    public ModelAndView createSkill(@RequestParam String name, @RequestParam String description, @RequestParam String category) {
+    public ModelAndView createSkill(@RequestParam String name, @RequestParam String description, @RequestParam Long category) {
         Skills _skill = new Skills();
         _skill.setName(name);
         _skill.setDescription(description);
@@ -94,7 +86,7 @@ public class SkillsController {
     }
 
     @PostMapping(path = {"/updateSkill"})
-    public ModelAndView updateSkill(@RequestParam Long id, String name, String description, String category) {
+    public ModelAndView updateSkill(@RequestParam Long id, String name, String description, Long category) {
 
         Skills _skill = skillsBO.searchSkillById(id);
         String msg;

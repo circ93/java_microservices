@@ -32,10 +32,15 @@
                     <label  class="form-label">Description</label>
                     <input type="text" class="form-control" name="description" required="required">
                 </div>
-                <div class="mb-3">
-                    <label  class="form-label">Category</label>
-                    <input type="text" class="form-control" name="category" required="required">
-                </div>
+                <label class="form-label">Category</label>
+                <select class="form-select mb-3" aria-label="Select Category" name="category">
+                    <c:forEach items="${categories}" var="cat">
+                    <option value="<c:out value="${cat.getId()}"/>">
+                        <c:out value="${cat.getName()}"/>
+                        </option>
+                    </c:forEach>
+                </select>
+
                 <button type="submit" class="btn btn-success">Save</button>
             </form>
 

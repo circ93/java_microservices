@@ -52,6 +52,7 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Categories</th>
+                    <th scope="col">Description</th>
                 </tr>
                 <p style="color: red;">${msg_error}</p>
                 </thead>
@@ -59,7 +60,8 @@
 
                 <c:forEach items="${categories}" var="cat">
                     <tr>
-                        <td><c:out value="${cat}"/></td>
+                        <td><c:out value="${cat.getName()}"/></td>
+                        <td><c:out value="${cat.getDescription()}"/></td>
                     </tr>
                 </c:forEach>
 

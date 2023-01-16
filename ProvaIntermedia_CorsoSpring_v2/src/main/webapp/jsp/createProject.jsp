@@ -20,7 +20,7 @@
         <!-- column -->
         <div class="col-9 mt-3">
 
-            <h1>Sites</h1>
+            <h1>Project</h1>
 
             <form method="post" action="${pageContext.request.contextPath}/createProject">
                 <h3>INSERISCI DATI PROGETTO</h3>

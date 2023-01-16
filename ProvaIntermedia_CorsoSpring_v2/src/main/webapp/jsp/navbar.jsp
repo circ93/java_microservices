@@ -24,6 +24,10 @@
                 <li class="nav-item">
                     <a class="nav-link linkStyle text-white ${param.newSkills}" aria-current="page" href="${pageContext.request.contextPath}/newSkills">New Skills</a>
                 </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link linkStyle text-white ${param.categories}" aria-current="page" href="${pageContext.request.contextPath}/categories">Categories</a>
+                </li>
             </ul>
         </div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 16, 2023 alle 17:58
+-- Creato il: Gen 16, 2023 alle 22:38
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.1.12
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `categories_skill`
+--
+
+CREATE TABLE `categories_skill` (
+  `id` bigint(20) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `categories_skill`
+--
+
+INSERT INTO `categories_skill` (`id`, `description`, `name`) VALUES
+(1, 'desc 1', 'cat 1'),
+(2, 'desc 2', 'cat 2'),
+(3, 'desc 3', 'cat 3'),
+(4, 'desc 4', 'cat 4'),
+(5, 'desc 5', 'cat 5');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `projects`
 --
 
@@ -39,9 +62,9 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `description`, `name`, `repo`) VALUES
-(1, 'description project 1', 'project 1', 'repo 1'),
-(2, 'description project 2', 'project 2', 'repo 2'),
-(3, 'description project 3', 'project 3', 'repo 3');
+(2, 'desc project 1', 'Project 1', 'repo 1'),
+(3, 'desc project 2', 'Project 2', 'repo 2'),
+(4, 'desc project 3', 'Project 3', 'repo 3');
 
 -- --------------------------------------------------------
 
@@ -51,7 +74,7 @@ INSERT INTO `projects` (`id`, `description`, `name`, `repo`) VALUES
 
 CREATE TABLE `skills` (
   `id` bigint(20) NOT NULL,
-  `category` varchar(255) DEFAULT NULL,
+  `category` bigint(20) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -61,13 +84,18 @@ CREATE TABLE `skills` (
 --
 
 INSERT INTO `skills` (`id`, `category`, `description`, `name`) VALUES
-(1, 'cat 1', 'skill 1 description', 'skill 1'),
-(2, 'cat 2', 'skill 2 description', 'skill 2'),
-(3, 'cat 3', 'skill 3 description', 'skill 3');
+(1, 1, 'desc skill 1', 'skill 1'),
+(3, 3, 'desc skill 5', 'skill 5');
 
 --
 -- Indici per le tabelle scaricate
 --
+
+--
+-- Indici per le tabelle `categories_skill`
+--
+ALTER TABLE `categories_skill`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indici per le tabelle `projects`
@@ -79,23 +107,40 @@ ALTER TABLE `projects`
 -- Indici per le tabelle `skills`
 --
 ALTER TABLE `skills`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK51hdjbib8x445q1j2jrc9nwbs` (`category`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
 --
+-- AUTO_INCREMENT per la tabella `categories_skill`
+--
+ALTER TABLE `categories_skill`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT per la tabella `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT per la tabella `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Limiti per le tabelle scaricate
+--
+
+--
+-- Limiti per la tabella `skills`
+--
+ALTER TABLE `skills`
+  ADD CONSTRAINT `FK51hdjbib8x445q1j2jrc9nwbs` FOREIGN KEY (`category`) REFERENCES `categories_skill` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

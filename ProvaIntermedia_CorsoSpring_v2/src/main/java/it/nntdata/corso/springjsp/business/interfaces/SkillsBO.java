@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface SkillsBO {
 
-    public List<String> findDistinctCategory() throws DataAccessException;
     public List<Skills> findAll() throws DataAccessException;
 
     public String createSkill(Skills skill) throws DataAccessException;

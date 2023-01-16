@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Setter
@@ -15,6 +13,14 @@ public class Skills extends BaseEntity{
 
     private String name;
     private String description;
-    private String category;
+    private Long category;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "category",
+            nullable = false,
+            insertable = false,
+            updatable = false
+    )
+    private CategoriesSkill cat;
 }
