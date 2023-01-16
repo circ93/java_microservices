@@ -21,6 +21,7 @@ public class SkillsController {
 
     @GetMapping(path = {"/", "/index"})
     public ModelAndView getCategory(){
+        //List<Skills> listCategory = skillsBO.findAll();
         List<String> listCategories = skillsBO.findDistinctCategory();
 
         if (listCategories.isEmpty()) {
