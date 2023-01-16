@@ -31,12 +31,22 @@ public class WebSiteInfoController {
         return new ModelAndView("/jsp/feature.jsp", "sites", listSites);
     }
 
+    // mi occorre perche quando la richiamo dall'update la chiamata è POST
+    // metodo 1 -> se non mi trovo nello stesso controller i parametri glieli passo concatenati alla chiamata e  li recupero tramite @RequestParam
     @PostMapping(path = {"/sites"})
     public ModelAndView sites2(@RequestParam String msg){
         List<WebSiteInfo> listSites = webSiteInfoBO.getAllSite();
         ModelAndView _model =new ModelAndView("/jsp/feature.jsp", "sites", listSites);
         _model.addObject("msg_update", msg);
          return _model;
+    }
+
+    //metodo 2 -> se mi trovo nello stesso controller non mi occorre recuperare i parametri passati da un altro metodo,
+    // in questo caso dell'update, verranno recuperati e concatenati alla richiesta in automatico, li recupero senza problemi nella jsp
+    @PostMapping(path = {"/sites3"})
+    public ModelAndView sites3(){
+        List<WebSiteInfo> listSites = webSiteInfoBO.getAllSite();
+        return new ModelAndView("/jsp/feature.jsp", "sites", listSites);
     }
 
     //la get mi occorre per aprire la pagina del form
@@ -68,7 +78,13 @@ public class WebSiteInfoController {
     @GetMapping(path = {"/searchInfo"})
     public ModelAndView searchInfo(@RequestParam Long id) {
         WebSiteInfo _site = webSiteInfoBO.searchSiteByID(id);
-        return new ModelAndView("/jsp/edit.jsp", "info", _site);
+        String msg;
+        if (_site == null){
+            msg = "Utente non trovato!";
+            return new ModelAndView("sites", "msg_error", msg);
+        } else {
+            return new ModelAndView("/jsp/edit.jsp", "info", _site);
+        }
     }
 
     @PostMapping(path = {"/updateInfo"})
@@ -85,9 +101,16 @@ public class WebSiteInfoController {
             webSiteInfoBO.saveInfo(_info);
             msg = "Info aggiornate correttamente!";
         }
-        //return new ModelAndView("sites", "msg_update", msg);
+        // metodo 2 -> chiamando un metodo dello stesso controller passo il parametro come al solito,
+        // nel metodo post /site3 non mi occorre recuperarlo perchè verrà concatenato in automatico e
+        // posso recuperare msg_update nella jsp.
+        return new ModelAndView("sites3", "msg_update", msg);
 
-        return new ModelAndView("sites?msg="+msg);
+        // metodo 2 -> richiamo un metodo di un controller diverso e recupera lo stesso i dati
+        //return new ModelAndView("sites4", "msg_update", msg);
+
+        // metodo 1 -> se chiamassi un metodo di un controller diverso devo concatenare il msg
+        //return new ModelAndView("sites?msg="+msg);
 
     }
 

@@ -24,6 +24,8 @@
 
             <p style="color: green;">${msg_delete}</p>
             <p style="color: green;">${msg_update}</p>
+            <p style="color: red;">${msg_error}</p>
+
 
             <table class="table">
                 <thead class="thead-dark">
