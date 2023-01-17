@@ -18,7 +18,7 @@
         <!-- column -->
         <div class="col-9 mt-3">
 
-            <form method="post" action="${pageContext.request.contextPath}/updateProject">
+            <form method="post" action="${pageContext.request.contextPath}/admin/updateProject">
                 <h3>MODIFICA PROJECT</h3>
                 <div class="mb-3">
                     <label  class="form-label">ID Project</label>

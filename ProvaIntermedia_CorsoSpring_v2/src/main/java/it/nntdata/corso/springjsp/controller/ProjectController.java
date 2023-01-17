@@ -23,9 +23,9 @@ public class ProjectController {
 
         if (listProject.isEmpty()) {
             String msg = "Nessun progetto trovato!";
-            return new ModelAndView("jsp/projects.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/projects.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/projects.jsp", "projects", listProject);
+            return new ModelAndView("/jsp/projects.jsp", "projects", listProject);
         }
     }
 
@@ -35,18 +35,18 @@ public class ProjectController {
 
         if (listProject.isEmpty()) {
             String msg = "Nessun progetto trovato!";
-            return new ModelAndView("jsp/projects.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/projects.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/projects.jsp", "projects", listProject);
+            return new ModelAndView("/jsp/projects.jsp", "projects", listProject);
         }
     }
 
-    @GetMapping(path = {"/newProject"})
+    @GetMapping(path = {"/admin/newProject"})
     public ModelAndView newProject() {
-        return new ModelAndView("jsp/createProject.jsp");
+        return new ModelAndView("/jsp/createProject.jsp");
     }
 
-    @PostMapping(path = {"/createProject"})
+    @PostMapping(path = {"/admin/createProject"})
     public ModelAndView createProject(@RequestParam String name, @RequestParam String description, @RequestParam String repo) {
         Projects _project = new Projects();
 
@@ -56,17 +56,17 @@ public class ProjectController {
 
         String msg = projectBO.createProject(_project);
 
-        return new ModelAndView("jsp/createProject.jsp", "msg_insert", msg);
+        return new ModelAndView("/jsp/createProject.jsp", "msg_insert", msg);
     }
 
-    @GetMapping(path = {"/deleteProject"})
+    @GetMapping(path = {"/admin/deleteProject"})
     public ModelAndView deleteProject(@RequestParam Long id){
 
         String msg = projectBO.deleteProject(id);
         return new ModelAndView("/projects", "msg_delete", msg);
     }
 
-    @GetMapping(path = {"/searchProject"})
+    @GetMapping(path = {"/admin/searchProject"})
     public ModelAndView searchProject(@RequestParam Long id) {
         Projects _project = projectBO.searchProjectById(id);
 
@@ -79,7 +79,7 @@ public class ProjectController {
         }
     }
 
-    @PostMapping(path = {"/updateProject"})
+    @PostMapping(path = {"/admin/updateProject"})
     public ModelAndView updateProject(@RequestParam Long id, String name, String description, String repo) {
 
         Projects _project = projectBO.searchProjectById(id);

@@ -42,8 +42,8 @@
                         <td><c:out value="${cat.getName()}"/></td>
                         <td><c:out value="${cat.getDescription()}"/></td>
                         <td>
-                            <a href="/deleteCategory?id=${cat.getId()}"><i class="fa-solid fa-trash"></i></a>
-                            <a href="/searchCategory?id=${cat.getId()}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/admin/deleteCategory?id=${cat.getId()}"><i class="fa-solid fa-trash"></i></a>
+                            <a href="/admin/searchCategory?id=${cat.getId()}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -65,7 +65,7 @@
 
             <h1>New Category</h1>
 
-            <form method="post" action="${pageContext.request.contextPath}/createCategory">
+            <form method="post" action="${pageContext.request.contextPath}/admin/createCategory">
                 <div class="mb-3">
                     <label  class="form-label">Name</label>
                     <input type="text" class="form-control" name="name" required="required">

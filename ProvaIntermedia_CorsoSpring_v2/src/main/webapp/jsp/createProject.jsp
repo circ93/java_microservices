@@ -22,7 +22,7 @@
 
             <h1>Project</h1>
 
-            <form method="post" action="${pageContext.request.contextPath}/createProject">
+            <form method="post" action="${pageContext.request.contextPath}/admin/createProject">
                 <h3>INSERISCI DATI PROGETTO</h3>
                 <div class="mb-3">
                     <label  class="form-label">Name</label>

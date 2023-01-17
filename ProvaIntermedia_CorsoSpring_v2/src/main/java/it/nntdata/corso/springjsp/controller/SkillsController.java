@@ -40,20 +40,20 @@ public class SkillsController {
 
         if (listSkills.isEmpty()) {
             String msg = "Non ci sono ancora skill!";
-            return new ModelAndView("jsp/skills.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/skills.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/skills.jsp", "skills", listSkills);
+            return new ModelAndView("/jsp/skills.jsp", "skills", listSkills);
         }
     }
 
-    @GetMapping(path = {"/newSkills"})
+    @GetMapping(path = {"/admin/newSkills"})
     public ModelAndView newSkills(){
         //recupero la lista di tutte le categori presenti così da popolare il dropdown menù
         List<CategoriesSkill> listCategories = categoriesSkillBO.getCategories();
-        return new ModelAndView("jsp/createSkills.jsp", "categories", listCategories);
+        return new ModelAndView("/jsp/createSkills.jsp", "categories", listCategories);
     }
 
-    @PostMapping(path = {"/createSkills"})
+    @PostMapping(path = {"/admin/createSkills"})
     public ModelAndView createSkill(@RequestParam String name, @RequestParam String description, @RequestParam Long category) {
         Skills _skill = new Skills();
         _skill.setName(name);
@@ -62,17 +62,17 @@ public class SkillsController {
 
         String msg = skillsBO.createSkill(_skill);
 
-        return new ModelAndView("jsp/createSkills.jsp", "msg_insert", msg);
+        return new ModelAndView("/jsp/createSkills.jsp", "msg_insert", msg);
     }
 
-    @GetMapping(path = {"/deleteSkill"})
+    @GetMapping(path = {"/admin/deleteSkill"})
     public ModelAndView deleteSkill(@RequestParam Long id){
 
         String msg = skillsBO.deleteSkill(id);
         return new ModelAndView("/skills", "msg_delete", msg);
     }
 
-    @GetMapping(path = {"/searchSkill"})
+    @GetMapping(path = {"/admin/searchSkill"})
     public ModelAndView searchSkill(@RequestParam Long id) {
         Skills _skill = skillsBO.searchSkillById(id);
 
@@ -85,7 +85,7 @@ public class SkillsController {
         }
     }
 
-    @PostMapping(path = {"/updateSkill"})
+    @PostMapping(path = {"/admin/updateSkill"})
     public ModelAndView updateSkill(@RequestParam Long id, String name, String description, Long category) {
 
         Skills _skill = skillsBO.searchSkillById(id);

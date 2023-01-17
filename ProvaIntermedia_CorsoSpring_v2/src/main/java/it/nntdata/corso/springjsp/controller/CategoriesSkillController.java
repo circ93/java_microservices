@@ -17,50 +17,50 @@ public class CategoriesSkillController {
     @Autowired
     CategoriesSkillBO categoriesSkillBO;
 
-    @GetMapping(path = {"/", "/index"})
+    @GetMapping(path = {"/", "/index", "/home"})
     public ModelAndView getCategories() {
         List<CategoriesSkill> listCategories = categoriesSkillBO.getCategories();
 
         if (listCategories.isEmpty()) {
             String msg = "Non ci sono categorie!";
-            return new ModelAndView("jsp/index.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/index.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/index.jsp", "categories", listCategories);
+            return new ModelAndView("/jsp/index.jsp", "categories", listCategories);
         }
     }
 
-    @GetMapping(path = {"/categories"})
+    @GetMapping(path = {"/admin/categories"})
     public ModelAndView getAllCategories() {
         List<CategoriesSkill> listCategories = categoriesSkillBO.findAll();
 
         if (listCategories.isEmpty()) {
             String msg = "Non ci sono categorie!";
-            return new ModelAndView("jsp/categoriesSkill.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/categoriesSkill.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/categoriesSkill.jsp", "categories", listCategories);
+            return new ModelAndView("/jsp/categoriesSkill.jsp", "categories", listCategories);
         }
     }
 
-    @PostMapping(path = {"/categories"})
+    @PostMapping(path = {"/admin/categories"})
     public ModelAndView getAllCategories2() {
         List<CategoriesSkill> listCategories = categoriesSkillBO.findAll();
 
         if (listCategories.isEmpty()) {
             String msg = "Non ci sono categorie!";
-            return new ModelAndView("jsp/categoriesSkill.jsp", "msg_error", msg);
+            return new ModelAndView("/jsp/categoriesSkill.jsp", "msg_error", msg);
         } else {
-            return new ModelAndView("jsp/categoriesSkill.jsp", "categories", listCategories);
+            return new ModelAndView("/jsp/categoriesSkill.jsp", "categories", listCategories);
         }
     }
 
-    @GetMapping(path = {"/deleteCategory"})
+    @GetMapping(path = {"/admin/deleteCategory"})
     public ModelAndView deleteCategory(@RequestParam Long id) {
         String msg = categoriesSkillBO.deleteCategory(id);
 
-        return new ModelAndView("/categories", "msg_delete", msg);
+        return new ModelAndView("/admin/categories", "msg_delete", msg);
     }
 
-    @PostMapping(path = {"/createCategory"})
+    @PostMapping(path = {"/admin/createCategory"})
     public ModelAndView createCategory(@RequestParam String name, String description) {
         CategoriesSkill _cat = new CategoriesSkill();
 
@@ -69,23 +69,23 @@ public class CategoriesSkillController {
 
         String msg = categoriesSkillBO.createCategory(_cat);
 
-        return new ModelAndView("/categories", "msg_insert", msg);
+        return new ModelAndView("/admin/categories", "msg_insert", msg);
     }
 
-    @GetMapping(path = {"/searchCategory"})
+    @GetMapping(path = {"/admin/searchCategory"})
     public ModelAndView searchCategory(@RequestParam Long id) {
         CategoriesSkill _cat = categoriesSkillBO.searchCategoryById(id);
 
         String msg;
         if (_cat == null){
             msg = "Categoria non trovata!";
-            return new ModelAndView("/categories", "msg_error", msg);
+            return new ModelAndView("/admin/categories", "msg_error", msg);
         } else {
             return new ModelAndView("/jsp/editCategories.jsp", "category", _cat);
         }
     }
 
-    @PostMapping(path = {"/updateCategory"})
+    @PostMapping(path = {"/admin/updateCategory"})
     public ModelAndView updateCategory(@RequestParam Long id, String name, String description) {
         CategoriesSkill _cat = categoriesSkillBO.searchCategoryById(id);
 
@@ -101,7 +101,7 @@ public class CategoriesSkillController {
             msg = "Categoria aggiornata correttamente!";
         }
 
-        return new ModelAndView("/categories", "msg_update", msg);
+        return new ModelAndView("/admin/categories", "msg_update", msg);
     }
 
 }

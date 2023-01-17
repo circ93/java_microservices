@@ -22,7 +22,7 @@
 
             <h1>Skills</h1>
 
-            <form method="post" action="${pageContext.request.contextPath}/createSkills">
+            <form method="post" action="${pageContext.request.contextPath}/admin/createSkills">
                 <h3>INSERISCI SKILL</h3>
                 <div class="mb-3">
                     <label  class="form-label">Name</label>

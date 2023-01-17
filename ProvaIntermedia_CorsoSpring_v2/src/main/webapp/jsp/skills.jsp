@@ -44,8 +44,8 @@
                         <td><c:out value="${skill.getDescription()}"/></td>
                         <td><c:out value="${skill.getCategory()}"/></td>
                         <td>
-                            <a href="/deleteSkill?id=${skill.getId()}"><i class="fa-solid fa-trash"></i></a>
-                            <a href="/searchSkill?id=${skill.getId()}"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/admin/deleteSkill?id=${skill.getId()}"><i class="fa-solid fa-trash"></i></a>
+                            <a href="/admin/searchSkill?id=${skill.getId()}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                 </c:forEach>
