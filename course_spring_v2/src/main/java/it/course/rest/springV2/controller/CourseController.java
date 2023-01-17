@@ -63,7 +63,7 @@ public class CourseController {
     }
     @PostMapping("/user/{id}/course")
     public ResponseEntity<Course> createCourseUser(@PathVariable Long id ,@RequestBody Course course) {
-       Course course1 = courseBo.createCourseUser(id, course);
+       Course _course = courseBo.createCourseUser(id, course);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PostMapping("/upload/{id}")

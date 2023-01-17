@@ -5,6 +5,7 @@ import org.springframework.http.ResponseCookie;
 
 public interface RegisterBO {
 
+    public String checkUserAndEmail(SignupRequest signupRequest);
     public String createUser(SignupRequest signupRequest);
 
     public String createUserAdmin(SignupRequest signupRequest);

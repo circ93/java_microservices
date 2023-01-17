@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -36,4 +37,5 @@ public class UserBOImpl implements UserBO {
     public boolean existEmail(SignupRequest signUpRequest){
         return userRepository.existsByUsername(signUpRequest.getUsername());
     }
+
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public interface CourseBO  {
      public Course findByIdFile(Long id);
-     void uploadFile(Long id, MultipartFile data) throws IOException;
+     public void uploadFile(Long id, MultipartFile data) throws IOException;
      public Course createCourseUser(Long id , Course course);
 
-     Course findCourse(Long id );
-     void deleteById(Long id );
+     public Course findCourse(Long id );
+     public void deleteById(Long id );
 
-     ArrayList<Course> findAll();
+     public ArrayList<Course> findAll();
 
-     void save(Course course);
+     public void save(Course course);
 }

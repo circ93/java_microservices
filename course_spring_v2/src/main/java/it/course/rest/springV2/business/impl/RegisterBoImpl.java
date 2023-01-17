@@ -10,15 +10,10 @@ import it.course.rest.springV2.repository.RoleRepository;
 import it.course.rest.springV2.repository.UserRepository;
 import it.course.rest.springV2.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class RegisterBoImpl implements RegisterBO {
@@ -42,8 +37,7 @@ public class RegisterBoImpl implements RegisterBO {
     private JwtUtils jwtUtils;
 
     @Override
-    public String createUser(SignupRequest signupRequest) {
-
+    public String checkUserAndEmail(SignupRequest signupRequest) {
         String msg;
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             msg = "usernameExists";
@@ -53,61 +47,59 @@ public class RegisterBoImpl implements RegisterBO {
             msg = "emailExists";
             return msg;
         }
-        User user = new User(signupRequest.getUsername(),
-                signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
-        Role modRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        userBO.addUserWithRole(user,modRole);
-        msg = "create";
+
+        return "OK";
+    }
+
+    @Override
+    public String createUser(SignupRequest signupRequest) {
+
+        String msg = checkUserAndEmail(signupRequest);
+
+        if (msg.equals("OK")) {
+            User user = new User(signupRequest.getUsername(),
+                    signupRequest.getEmail(),
+                    encoder.encode(signupRequest.getPassword()));
+            Role modRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            userBO.addUserWithRole(user,modRole);
+            return "create";
+        }
 
         return msg;
-
     }
 
     @Override
     public String createUserAdmin(SignupRequest signupRequest) {
 
-        String msg;
-        if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            msg = "usernameExists";
-            return msg;
+        String msg = checkUserAndEmail(signupRequest);
+
+        if (msg.equals("OK")){
+            User user = new User(signupRequest.getUsername(),
+                    signupRequest.getEmail(),
+                    encoder.encode(signupRequest.getPassword()));
+            Role modRole = roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            userBO.addUserWithRole(user,modRole);
+            return "create";
         }
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            msg = "emailExists";
-            return msg;
-        }
-        User user = new User(signupRequest.getUsername(),
-                signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
-        Role modRole = roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        userBO.addUserWithRole(user,modRole);
-        msg = "create";
 
         return msg;
-
     }
 
     @Override
     public String createUserModerator(SignupRequest signupRequest) {
 
-        String msg;
-        if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            msg = "usernameExists";
-            return msg;
+        String msg = checkUserAndEmail(signupRequest);
+
+        if (msg.equals("OK")){
+            User user = new User(signupRequest.getUsername(),
+                    signupRequest.getEmail(),
+                    encoder.encode(signupRequest.getPassword()));
+            Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            userBO.addUserWithRole(user,modRole);
+            return "create";
         }
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            msg = "emailExists";
-            return msg;
-        }
-        User user = new User(signupRequest.getUsername(),
-                signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
-        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        userBO.addUserWithRole(user,modRole);
-        msg = "create";
 
         return msg;
-
     }
 
     @Override

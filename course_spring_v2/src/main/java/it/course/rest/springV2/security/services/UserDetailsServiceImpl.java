@@ -1,5 +1,6 @@
 package it.course.rest.springV2.security.services;
 
+import it.course.rest.springV2.business.interfaces.UserBO;
 import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

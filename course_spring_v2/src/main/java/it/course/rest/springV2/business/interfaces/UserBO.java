@@ -4,9 +4,11 @@ import it.course.rest.springV2.model.Role;
 import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.payload.request.SignupRequest;
 
+import java.util.Optional;
+
 public interface UserBO {
-    User saveUser(User user);
-    boolean existUser(SignupRequest signUpRequest);
-    boolean existEmail(SignupRequest signUpRequest);
-    User addUserWithRole(User user, Role role);
+    public User saveUser(User user);
+    public boolean existUser(SignupRequest signUpRequest);
+    public boolean existEmail(SignupRequest signUpRequest);
+    public User addUserWithRole(User user, Role role);
 }
