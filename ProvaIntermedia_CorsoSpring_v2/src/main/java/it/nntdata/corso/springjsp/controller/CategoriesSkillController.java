@@ -29,7 +29,7 @@ public class CategoriesSkillController {
         }
     }
 
-    @GetMapping(path = {"/admin/categories"})
+    @GetMapping(path = {"/adminPro/categories"})
     public ModelAndView getAllCategories() {
         List<CategoriesSkill> listCategories = categoriesSkillBO.findAll();
 
@@ -41,7 +41,7 @@ public class CategoriesSkillController {
         }
     }
 
-    @PostMapping(path = {"/admin/categories"})
+    @PostMapping(path = {"/adminPro/categories"})
     public ModelAndView getAllCategories2() {
         List<CategoriesSkill> listCategories = categoriesSkillBO.findAll();
 
@@ -53,14 +53,14 @@ public class CategoriesSkillController {
         }
     }
 
-    @GetMapping(path = {"/admin/deleteCategory"})
+    @GetMapping(path = {"/adminPro/deleteCategory"})
     public ModelAndView deleteCategory(@RequestParam Long id) {
         String msg = categoriesSkillBO.deleteCategory(id);
 
-        return new ModelAndView("/admin/categories", "msg_delete", msg);
+        return new ModelAndView("/adminPro/categories", "msg_delete", msg);
     }
 
-    @PostMapping(path = {"/admin/createCategory"})
+    @PostMapping(path = {"/adminPro/createCategory"})
     public ModelAndView createCategory(@RequestParam String name, String description) {
         CategoriesSkill _cat = new CategoriesSkill();
 
@@ -69,23 +69,23 @@ public class CategoriesSkillController {
 
         String msg = categoriesSkillBO.createCategory(_cat);
 
-        return new ModelAndView("/admin/categories", "msg_insert", msg);
+        return new ModelAndView("/adminPro/categories", "msg_insert", msg);
     }
 
-    @GetMapping(path = {"/admin/searchCategory"})
+    @GetMapping(path = {"/adminPro/searchCategory"})
     public ModelAndView searchCategory(@RequestParam Long id) {
         CategoriesSkill _cat = categoriesSkillBO.searchCategoryById(id);
 
         String msg;
         if (_cat == null){
             msg = "Categoria non trovata!";
-            return new ModelAndView("/admin/categories", "msg_error", msg);
+            return new ModelAndView("/adminPro/categories", "msg_error", msg);
         } else {
             return new ModelAndView("/jsp/editCategories.jsp", "category", _cat);
         }
     }
 
-    @PostMapping(path = {"/admin/updateCategory"})
+    @PostMapping(path = {"/adminPro/updateCategory"})
     public ModelAndView updateCategory(@RequestParam Long id, String name, String description) {
         CategoriesSkill _cat = categoriesSkillBO.searchCategoryById(id);
 
@@ -101,7 +101,7 @@ public class CategoriesSkillController {
             msg = "Categoria aggiornata correttamente!";
         }
 
-        return new ModelAndView("/admin/categories", "msg_update", msg);
+        return new ModelAndView("/adminPro/categories", "msg_update", msg);
     }
 
 }

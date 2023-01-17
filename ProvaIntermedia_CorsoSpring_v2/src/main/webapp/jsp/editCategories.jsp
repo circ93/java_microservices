@@ -18,7 +18,7 @@
         <!-- column -->
         <div class="col-9 mt-3">
 
-            <form method="post" action="${pageContext.request.contextPath}/admin/updateCategory">
+            <form method="post" action="${pageContext.request.contextPath}/adminPro/updateCategory">
                 <h3>MODIFICA CATEGORY</h3>
                 <div class="mb-3">
                     <label  class="form-label">ID Category</label>

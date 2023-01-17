@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 @Entity
 @Getter
 @Setter
@@ -17,20 +14,23 @@ public class Projects extends BaseEntity{
     private String description;
     private String repo;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "projects_skillses",
-            joinColumns = @JoinColumn(name = "projects_id"),
-            inverseJoinColumns = @JoinColumn(name = "skillses_id"))
-    private Set<Skills> skillses = new LinkedHashSet<>();
+
+    //esempio fatto insieme per capire usando JPA BUDDY
+
+    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    //@JoinTable(name = "projects_skillses",
+    //        joinColumns = @JoinColumn(name = "projects_id"),
+    //        inverseJoinColumns = @JoinColumn(name = "skillses_id"))
+    //private Set<Skills> skillses = new LinkedHashSet<>();
 
 
     //aggiungere add e remove del set
-    public void addSkill(Skills skill) {
-        skillses.add(skill);
-    }
+    //public void addSkill(Skills skill) {
+    //    skillses.add(skill);
+    //}
 
-    public void removeSkill(Skills skill ) {
-        skillses.remove(skill);
-    }
+    //public void removeSkill(Skills skill ) {
+    //    skillses.remove(skill);
+    //}
 
 }

@@ -33,10 +33,18 @@
                     <label  class="form-label">Description</label>
                     <input type="text" class="form-control" name="description" required="required" value="${skill.getDescription()}" >
                 </div>
-                <div class="mb-3">
-                    <label  class="form-label">Category</label>
-                    <input type="text" class="form-control" name="category" required="required" value="${skill.getCategory()}" >
-                </div>
+                <label  class="form-label">Category</label>
+                <select class="form-select mb-3" aria-label="Select Category" name="category">
+                    <option value="<c:out value="${skill.getId()}"/>" selected>${catSkill.getName()}</option>
+                    <c:forEach items="${categories}" var="cat">
+                        <c:if test="${cat.getId() != catSkill.getId()}">
+                        <option value="<c:out value="${cat.getId()}"/>">
+                            <c:out value="${cat.getName()}"/>
+                        </option>
+                        </c:if>
+                    </c:forEach>
+                </select>
+
                 <button type="submit" class="btn btn-success">Update</button>
             </form>
 
@@ -50,3 +58,11 @@
 
 </body>
 </html>
+
+
+<!--
+<div class="mb-3">
+<label  class="form-label">Category</label>
+<input type="text" class="form-control" name="category" required="required" value="${skill.getCategory()}" >
+</div>
+-->

@@ -28,11 +28,14 @@
                 <li class="nav-item">
                     <a class="nav-link linkStyle text-white ${param.newSkills}" aria-current="page" href="${pageContext.request.contextPath}/admin/newSkills">New Skills</a>
                 </li>
+                </sec:authorize>
+                <sec:authorize access="hasRole('ADMIN')">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link linkStyle text-white ${param.categories}" aria-current="page" href="${pageContext.request.contextPath}/admin/categories">Categories</a>
+                    <a class="nav-link linkStyle text-white ${param.categories}" aria-current="page" href="${pageContext.request.contextPath}/adminPro/categories">Categories</a>
                 </li>
                 </sec:authorize>
+
 
             </ul>
         </div>

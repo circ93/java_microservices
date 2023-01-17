@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 
 @Entity
 @Setter
@@ -28,7 +25,9 @@ public class Skills extends BaseEntity{
     private CategoriesSkill cat;
 
 
-    @ManyToMany(mappedBy = "skillses", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Projects> projectses = new LinkedHashSet<>();
+    //codice generato in automatico nella prova fatta con JPA BUDDY
+
+    //@ManyToMany(mappedBy = "skillses", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    //private Set<Projects> projectses = new LinkedHashSet<>();
 
 }

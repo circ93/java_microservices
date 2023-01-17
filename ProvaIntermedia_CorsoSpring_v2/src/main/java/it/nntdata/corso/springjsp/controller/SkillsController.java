@@ -76,12 +76,19 @@ public class SkillsController {
     public ModelAndView searchSkill(@RequestParam Long id) {
         Skills _skill = skillsBO.searchSkillById(id);
 
+        List<CategoriesSkill> _categories = categoriesSkillBO.findAll();
+
+        CategoriesSkill _cat = categoriesSkillBO.searchCategoryById(_skill.getCategory());
+
         String msg;
         if (_skill == null){
             msg = "Skill non trovata!";
             return new ModelAndView("/skills", "msg_error", msg);
         } else {
-            return new ModelAndView("/jsp/editSkill.jsp", "skill", _skill);
+            ModelAndView _model =new ModelAndView("/jsp/editSkill.jsp", "skill", _skill);
+            _model.addObject("categories", _categories);
+            _model.addObject("catSkill", _cat);
+            return _model;
         }
     }
 
