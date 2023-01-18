@@ -11,4 +11,8 @@ public interface UserBO {
     public boolean existUser(SignupRequest signUpRequest);
     public boolean existEmail(SignupRequest signUpRequest);
     public User addUserWithRole(User user, Role role);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

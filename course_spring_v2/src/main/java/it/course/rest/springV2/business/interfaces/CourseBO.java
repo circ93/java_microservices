@@ -10,11 +10,10 @@ public interface CourseBO  {
      public Course findByIdFile(Long id);
      public void uploadFile(Long id, MultipartFile data) throws IOException;
      public Course createCourseUser(Long id , Course course);
-
      public Course findCourse(Long id );
      public void deleteById(Long id );
-
      public ArrayList<Course> findAll();
-
      public void save(Course course);
+     public void deleteFileById(Long id);
+
 }

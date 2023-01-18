@@ -7,11 +7,9 @@ import it.course.rest.springV2.model.Role;
 import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.payload.request.SignupRequest;
 import it.course.rest.springV2.repository.RoleRepository;
-import it.course.rest.springV2.repository.UserRepository;
 import it.course.rest.springV2.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseCookie;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +23,7 @@ public class RegisterBoImpl implements RegisterBO {
     private PasswordEncoder encoder;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserBO userBO;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -39,11 +31,11 @@ public class RegisterBoImpl implements RegisterBO {
     @Override
     public String checkUserAndEmail(SignupRequest signupRequest) {
         String msg;
-        if (userRepository.existsByUsername(signupRequest.getUsername())) {
+        if (userBO.existsByUsername(signupRequest.getUsername())) {
             msg = "usernameExists";
             return msg;
         }
-        if (userRepository.existsByEmail(signupRequest.getEmail())) {
+        if (userBO.existsByEmail(signupRequest.getEmail())) {
             msg = "emailExists";
             return msg;
         }

@@ -63,5 +63,14 @@ public class CourseBOImpl implements CourseBO {
         Course _course = courseRepository.save(course);
     }
 
+    @Override
+    public void deleteFileById(Long id) {
+        Course _course = courseRepository.getReferenceById(id);
+        _course.setData(null);
+        _course.setType(null);
+
+        courseRepository.save(_course);
+    }
+
 
 }

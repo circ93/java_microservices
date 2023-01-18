@@ -1,5 +1,6 @@
 package it.nntdata.corso.springjsp.repository;
 
+import it.nntdata.corso.springjsp.model.CatSkill;
 import it.nntdata.corso.springjsp.model.CategoriesSkill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,7 @@ public interface CategoriesSkillRepository extends JpaRepository<CategoriesSkill
     @Query (value = "from CategoriesSkill c group by c.name")
     List<CategoriesSkill> getCategories();
 
-}
+    @Query(value = "select new it.nntdata.corso.springjsp.model.CatSkill(c.name, c.description) from CategoriesSkill c group by c.name")
+    List<CatSkill> getCatSkill();
 
-// se facessi una query dove mi occorrono solo due colonne anzicchè tutte le coonne, con che tipo di dato lo recupero?
+}
