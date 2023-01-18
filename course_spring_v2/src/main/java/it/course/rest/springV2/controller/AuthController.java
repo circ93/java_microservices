@@ -3,18 +3,15 @@ package it.course.rest.springV2.controller;
 import it.course.rest.springV2.business.interfaces.RegisterBO;
 import it.course.rest.springV2.business.interfaces.UserBO;
 import it.course.rest.springV2.business.interfaces.RoleBO;
-import it.course.rest.springV2.model.ERole;
-import it.course.rest.springV2.model.Role;
-import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.payload.request.LoginRequest;
 import it.course.rest.springV2.payload.request.SignupRequest;
 import it.course.rest.springV2.payload.response.MessageResponse;
 import it.course.rest.springV2.payload.response.UserInfoResponse;
 import it.course.rest.springV2.security.jwt.JwtUtils;
 import it.course.rest.springV2.security.services.UserDetailsImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 

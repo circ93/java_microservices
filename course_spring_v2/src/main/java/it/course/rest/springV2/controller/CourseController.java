@@ -22,7 +22,7 @@ public class CourseController {
     @PostMapping("/course")
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
         courseBo.save(course);
-        return new ResponseEntity<Course>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 

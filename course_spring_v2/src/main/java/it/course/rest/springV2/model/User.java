@@ -2,8 +2,10 @@ package it.course.rest.springV2.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
