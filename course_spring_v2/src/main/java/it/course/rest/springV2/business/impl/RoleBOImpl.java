@@ -7,6 +7,8 @@ import it.course.rest.springV2.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RoleBOImpl implements RoleBO {
     @Autowired
@@ -25,6 +27,11 @@ public class RoleBOImpl implements RoleBO {
                 return roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         }
+    }
+
+    @Override
+    public Optional<Role> findRoleByName(ERole roleUser) {
+        return roleRepository.findByName(roleUser);
     }
 
 }

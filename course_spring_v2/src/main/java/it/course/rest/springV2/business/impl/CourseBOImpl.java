@@ -1,11 +1,11 @@
 package it.course.rest.springV2.business.impl;
 
 import it.course.rest.springV2.business.interfaces.CourseBO;
+import it.course.rest.springV2.business.interfaces.UserBO;
 import it.course.rest.springV2.exception.ResourceNotFoundException;
 import it.course.rest.springV2.model.Course;
 import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.repository.CourseRepository;
-import it.course.rest.springV2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +21,8 @@ public class CourseBOImpl implements CourseBO {
     @Autowired
     CourseRepository courseRepository;
     @Autowired
-    UserRepository userRepository;
+    UserBO userBO;
+
     @Override
     public Course findByIdFile(Long id) {
         return courseRepository.findById(id).get();
@@ -37,7 +38,7 @@ public class CourseBOImpl implements CourseBO {
     }
 
     public Course createCourseUser(Long id , Course course){
-        User user = userRepository.getReferenceById(id);
+        User user = userBO.findUserById(id);
         Set<User> userSet = new HashSet<>();
         userSet.add(user);
         course.setUsers(userSet);
@@ -70,6 +71,10 @@ public class CourseBOImpl implements CourseBO {
         _course.setType(null);
 
         courseRepository.save(_course);
+        // avrei potuto impostare un array di byte vuoto invece di settarlo a null
+        // byte[] fileEmpty = new byte[0];
+        // _course.setData(fileEmpty);
+        // _course.setType(fileEmpty);
     }
 
 

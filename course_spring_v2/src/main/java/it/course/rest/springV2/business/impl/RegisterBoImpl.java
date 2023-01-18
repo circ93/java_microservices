@@ -1,12 +1,12 @@
 package it.course.rest.springV2.business.impl;
 
 import it.course.rest.springV2.business.interfaces.RegisterBO;
+import it.course.rest.springV2.business.interfaces.RoleBO;
 import it.course.rest.springV2.business.interfaces.UserBO;
 import it.course.rest.springV2.model.ERole;
 import it.course.rest.springV2.model.Role;
 import it.course.rest.springV2.model.User;
 import it.course.rest.springV2.payload.request.SignupRequest;
-import it.course.rest.springV2.repository.RoleRepository;
 import it.course.rest.springV2.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseCookie;
@@ -17,16 +17,13 @@ import org.springframework.stereotype.Service;
 public class RegisterBoImpl implements RegisterBO {
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder encoder;
-
-    @Autowired
     private UserBO userBO;
-
+    @Autowired
+    private RoleBO roleBO;
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public String checkUserAndEmail(SignupRequest signupRequest) {
@@ -52,7 +49,7 @@ public class RegisterBoImpl implements RegisterBO {
             User user = new User(signupRequest.getUsername(),
                     signupRequest.getEmail(),
                     encoder.encode(signupRequest.getPassword()));
-            Role modRole = roleRepository.findByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            Role modRole = roleBO.findRoleByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             userBO.addUserWithRole(user,modRole);
             return "create";
         }
@@ -69,7 +66,7 @@ public class RegisterBoImpl implements RegisterBO {
             User user = new User(signupRequest.getUsername(),
                     signupRequest.getEmail(),
                     encoder.encode(signupRequest.getPassword()));
-            Role modRole = roleRepository.findByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            Role modRole = roleBO.findRoleByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             userBO.addUserWithRole(user,modRole);
             return "create";
         }
@@ -86,7 +83,7 @@ public class RegisterBoImpl implements RegisterBO {
             User user = new User(signupRequest.getUsername(),
                     signupRequest.getEmail(),
                     encoder.encode(signupRequest.getPassword()));
-            Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            Role modRole = roleBO.findRoleByName(ERole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             userBO.addUserWithRole(user,modRole);
             return "create";
         }

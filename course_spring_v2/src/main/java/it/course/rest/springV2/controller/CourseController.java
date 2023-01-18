@@ -3,8 +3,6 @@ package it.course.rest.springV2.controller;
 
 import it.course.rest.springV2.business.interfaces.CourseBO;
 import it.course.rest.springV2.model.Course;
-import it.course.rest.springV2.repository.CourseRepository;
-import it.course.rest.springV2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,21 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api")
 public class CourseController {
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     CourseBO courseBo;
-
-
 
     @PostMapping("/course")
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
@@ -51,21 +42,22 @@ public class CourseController {
         return new ResponseEntity<>(_course, HttpStatus.OK);
     }
     @DeleteMapping("/course/{id}")
-    public  ResponseEntity<HttpStatus> deleteCourse(@PathVariable long id){
+    public  ResponseEntity<String> deleteCourse(@PathVariable long id){
         courseBo.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Course con id " + id + " eliminato con successo!",HttpStatus.OK);
     }
 
     @PutMapping("/course/{id}")
     public ResponseEntity<Course> updateRoles(@PathVariable("id") long id, @RequestBody Course course) {
         Course _course = courseBo.findCourse(id);
         _course.setName(course.getName());
-        return new ResponseEntity<>(courseRepository.save(_course), HttpStatus.OK);
+        courseBo.save(_course);
+        return new ResponseEntity<>(_course, HttpStatus.OK);
     }
     @PostMapping("/user/{id}/course")
-    public ResponseEntity<Course> createCourseUser(@PathVariable Long id ,@RequestBody Course course) {
+    public ResponseEntity<String> createCourseUser(@PathVariable Long id ,@RequestBody Course course) {
        Course _course = courseBo.createCourseUser(id, course);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>("Nuovo utente creato con successo!",HttpStatus.CREATED);
     }
     @PostMapping("/upload/{id}")
     public ResponseEntity<Map<String,String>> uploadFile(@PathVariable Long id ,@RequestParam("file") MultipartFile data) {
@@ -92,7 +84,7 @@ public class CourseController {
     public ResponseEntity<String> deleteFile(@PathVariable Long id) {
         courseBo.deleteFileById(id);
 
-        return new ResponseEntity<>("File con " + id + " eliminato!", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("File con id " + id + " eliminato!", HttpStatus.OK);
 
     }
 

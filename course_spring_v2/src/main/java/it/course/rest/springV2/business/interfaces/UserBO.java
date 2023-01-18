@@ -15,4 +15,6 @@ public interface UserBO {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
+    User findUserById(Long id);
 }

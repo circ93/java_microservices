@@ -47,4 +47,11 @@ public class UserBOImpl implements UserBO {
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
+
+    @Override
+    public User findUserById(Long id) {
+        User _user = userRepository.getReferenceById(id);
+
+        return _user;
+    }
 }
