@@ -23,4 +23,16 @@ public class CategoryBOImpl implements CategoryBO {
     public List<Category> getAllCategory(){
         return categoryRepository.findAll();
     }
+
+    @Override
+    public String save(Category cat) throws DataAccessException {
+
+        if (cat == null) {
+            return "Categoria non valida!";
+        } else {
+            categoryRepository.save(cat);
+            return "Categoria creata correttamente!";
+        }
+    }
+
 }

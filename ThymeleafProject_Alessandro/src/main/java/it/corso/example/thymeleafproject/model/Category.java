@@ -16,6 +16,10 @@ public class Category extends BaseEntity {
     @OneToMany(mappedBy = "category", cascade = {CascadeType.REFRESH, CascadeType.DETACH}, orphanRemoval = true)
     private List<Asset> cryptoes = new ArrayList<>();
 
+    public Category() {
+
+    }
+
     public List<Asset> getCryptoes() {
         return cryptoes;
     }
@@ -29,5 +33,9 @@ public class Category extends BaseEntity {
     }
     public void deleteCrypto(Asset asset){
         this.cryptoes.remove(asset);
+    }
+
+    public Category(String name) {
+        this.name = name;
     }
 }

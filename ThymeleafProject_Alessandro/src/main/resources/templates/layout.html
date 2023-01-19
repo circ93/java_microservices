@@ -87,6 +87,10 @@
                                 <span data-feather="bar-chart-2" class="align-text-bottom"></span>
                                 Reports
                             </a>
+                            <a class="nav-link active" href="/createCat">
+                                <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+                                New Category
+                            </a>
                         </li>
                         <li th:each="categories : ${category}">
                             <a th:text="category.name"></a>
@@ -101,6 +105,10 @@
     <!-- home -->
     <div layout:fragment="home"></div>
     <!-- end home -->
+    <!-- new category -->
+    <div layout:fragment="newCategory"></div>
+    <!-- end new category -->
+
 
 
     <script th:src="@{/assets/dist/js/bootstrap.bundle.min.js}"></script>

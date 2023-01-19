@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="newCategory">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div th:insert="~{navbar-left :: navbar-left}"></div> -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="chartjs-size-monitor">
+          <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+          </div>
+          <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+
+        </div>
+
+
+        <h2>Insert new category!</h2>
+
+        <form method="POST" th:action="@{/createCat}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save category</button>
+        </form>
+
+
+      </main>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
